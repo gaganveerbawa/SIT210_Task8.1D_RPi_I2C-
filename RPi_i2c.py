@@ -1,7 +1,7 @@
 # Name:       Gaganveer Singh
 # Student ID: 2210994783
-
-import smbus  # Library for I2C communication
+impo
+rt smbus  # Library for I2C communication
 import time
 
 # Address for BH1750 Sensor
@@ -12,19 +12,22 @@ HIGH_RESOLUTION_MODE = 0x20
 # Initialize the I2C bus
 i2c_bus = smbus.SMBus(1)
 
-# Function to get light value 
+# Function to get light value
 def read_light_intensity():
+    # Read the light intensity data in high-resolution mode
     raw_data = i2c_bus.read_i2c_block_data(BH1750_ADDRESS, HIGH_RESOLUTION_MODE)
-     # Convert the raw data bytes to a lux value
+    
+    # Convert the raw data bytes to a lux value
     luminance = (raw_data[1] + (256 * raw_data[0])) / 1.2
     return luminance
 
 try:
     while True:
+        # Read the light intensity
         light_value = read_light_intensity()
         print(f"Light Intensity: {light_value} lux")
 		
-		# Classify and print light conditions based on the lux value
+        # Classify and print light conditions based on the lux value
         if light_value < 1:
             print("Too Dark")
         elif 1 <= light_value < 10:
@@ -37,8 +40,10 @@ try:
             print("Bright")
         else:
             print("Too Bright")
-		# Wait for 1 second before reading next value
+		
+        # Wait for 1 second before reading the next value
         time.sleep(1.0)
 
 except KeyboardInterrupt:
+    # Handle keyboard interrupt and exit the program gracefully
     print("Exiting the program...")
