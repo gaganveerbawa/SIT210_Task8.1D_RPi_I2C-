@@ -19,6 +19,7 @@ def read_light_intensity():
     
     # Convert the raw data bytes to a lux value
     luminance = (raw_data[1] + (256 * raw_data[0])) / 1.2
+    # The raw data from the sensor is a 2-byte value.
     return luminance
 
 try:
