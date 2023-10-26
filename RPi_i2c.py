@@ -1,7 +1,6 @@
 # Name:       Gaganveer Singh
 # Student ID: 2210994783
-impo
-rt smbus  # Library for I2C communication
+import smbus  # Library for I2C communication
 import time
 
 # Address for BH1750 Sensor
